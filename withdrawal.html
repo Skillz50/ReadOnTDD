@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Withdraw Points</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+      margin: 0;
+    }
+    .page-container {
+      border: 5px solid #fff;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    button {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <h1>Withdraw Points</h1>
+    <input type="number" id="withdrawAmount" placeholder="Enter amount to withdraw (80-100)" min="80" max="100">
+    <button onclick="submitWithdraw()">Submit</button>
+  </div>
+
+  <script>
+    function submitWithdraw() {
+      const withdrawAmount = parseInt(document.getElementById("withdrawAmount").value);
+      const points = parseInt(localStorage.getItem("loginPoints")) || 0;
+
+      if (withdrawAmount >= 80 && withdrawAmount <= 100 && withdrawAmount <= points) {
+        alert(`You have successfully withdrawn ${withdrawAmount} points.`);
+        localStorage.setItem("loginPoints", points - withdrawAmount);
+        window.location.href = "dashboard.html"; // Redirect back to dashboard
+      } else {
+        alert("Invalid withdrawal amount. Please enter a value between 80 and 100, and ensure you have enough points.");
+      }
+    }
+  </script>
+</body>
+</html>

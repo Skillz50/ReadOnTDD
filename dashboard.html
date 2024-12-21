@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: 'optima', sans-serif;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      margin: 0;
+      width: 95%;
+      height: 95%;
+      background: url('film.jpeg');
+      backdrop-filter: blur(23px);
+      overflow:hidden;
+
+    }
+    .page-container {
+      border: 5px solid #fff;
+      border-radius: 15px;
+      padding: 10px;
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      margin-bottom:30px;
+      margin-left:7px;
+    }
+    h1 {
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      
+    }
+    #avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .logout, .withdraw, .publish {
+      background: linear-gradient(135deg, #7B68EE, #ffa550);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .logout:hover, .withdraw:hover, .publish:hover {
+      opacity: 0.9;
+    }
+    .points-display {
+      margin-top: 5px;
+      font-size: 13px;
+      border: 2px solid #fff;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .reward {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ffeb3b;
+      color: #333;
+      font-size: 16px;
+      display: none;
+      border: 2px solid #fff;
+      border-radius: 5px;
+    }
+    .reward img {
+      width: 100px;
+      height: 100px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+     .me {
+     font-size:25px;
+     margin-bottom:25px;
+     border-radius: 5px;
+     font-family: hervana;
+     border:3px solid #fff;
+     padding-right: 30px;
+     padding-left:30px;
+     
+     background-color: rgba(0, 0, 0, 0.7);
+
+}
+  </style>
+</head>
+<body>
+  <div class="page-container">
+
+      <img id="avatar" src="logo.png" alt="User Avatar">
+          <h1>Welcome,<span id="username"></span>!
+    </h1>
+    
+    <div class="button-container">
+      <button class="logout" onclick="logout()">Logout</button>
+      <button class="withdraw" onclick="redirectToWithdrawPage()">Withdrawal</button>
+      <button class="publish" onclick="redirectToPublishStoryPage()">Publish</button>
+    </div>
+
+    <div class="points-display">
+      <p>ReadOn Point: <b>RP</b> <span id="points">0</span></p>
+    </div>
+
+    <div class="reward" id="rewardMessage">
+      <p>Congratulations! You've earned a reward!</p>
+      <img id="rewardImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJwZDpV_Cnr1McbtTErGWseIaL7DtsEetIMw&usqp=CAU" alt="Reward Image">
+    </div>
+  </div>
+<div class="me">Story Profiles</div>
+
+  <div class="container">
+    <div class="grid">
+      <a href="page1.html" class="circle" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVbHtXyAoQfOJ4y2ecWWYvPpmVw41M6lvN4iXqYAaIWrOAmsFx37pmsaYT&s=10');"></a>
+      <a href="page2.html" class="circle" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0bmCxGhdsGtg8_kAST30ccbFBlbbSLQZsAQ&usqp=CAU');"></a>
+      <a href="page3.html" class="circle" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT212Xsf1WqUn0BftZqSSmYqwG3jv0K7ar9KA&usqp=CAU');"></a>
+      <a href="page4.html" class="circle" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvBdmiPEaocZ971YoAQk1eR4DEIiEuyhYshsTWO6hOxELwyR6R1tQ5vs8P&s=10');"></a>
+      <a href="page7.html" class="circle" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj8EFQa4dPydn8QekExK1VDT6UGqskpB0Eag&usqp=CAU');"></a>
+
+      <a href="page6.html" class="circle" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2GSTzEppA-GpvBzJGHXiEDU_wyHw4JSekvA&usqp=CAU');"></a>
+     
+    </div>
+    <h1>Click on Story Profile to Continue</h1>
+    <button class="btn" id="moreButton">
+      <span>Vote</span>
+    </button>
+  </div>
+
+
+<!-- Modal -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <h2>ReadOn Voting</h2>
+      <p>
+        By using this platform, you are entitled to vote for any storywriters of your choice to claim our honored and distinguished award annually. 
+      </p>
+      <button id="agreeButton" class="btn">Continue</button>
+    </div>
+  </div>
+
+  <script src="box.js"></script>
+
+
+  <script>
+    // Get username from localStorage and display it
+    const username = localStorage.getItem("username");
+    if (username) {
+      document.getElementById("username").textContent = username;
+      checkLoginPoints();
+    } else {
+      // Redirect to login page if no username is found
+      window.location.href = "index.html"; // Replace with your login page URL
+    }
+
+    // Check and update login points
+    function checkLoginPoints() {
+      const lastLogin = localStorage.getItem("lastLogin");
+      const currentTime = new Date().getTime();
+
+      // Check if the last login was today
+      const lastLoginDate = new Date(parseInt(lastLogin));
+      const currentDate = new Date();
+
+      if (lastLogin && currentDate.toDateString() === lastLoginDate.toDateString()) {
+        const points = parseInt(localStorage.getItem("loginPoints")) || 0;
+        document.getElementById("points").textContent = points;
+      } else {
+        // Reset points if it's a new day
+        localStorage.setItem("loginPoints", 0);
+        document.getElementById("points").textContent = 0;
+      }
+    }
+
+    // Increment points and update the last login time
+    function incrementLoginPoints() {
+      const points = parseInt(localStorage.getItem("loginPoints")) || 0;
+      const newPoints = points + 1;
+      localStorage.setItem("loginPoints", newPoints);
+      localStorage.setItem("lastLogin", new Date().getTime()); // Store the login time
+      document.getElementById("points").textContent = newPoints;
+
+      checkForReward(newPoints);
+    }
+
+    // Check if the user has earned a reward based on their points
+    function checkForReward(points) {
+      if (points >= 10 && points < 20) {
+        showReward("You've earned a 10-point reward!", "https://example.com/10-point-reward.png");
+      } else if (points >= 20 && points < 30) {
+        showReward("Awesome! You've earned a 20-point reward!", "https://example.com/20-point-reward.png");
+      } else if (points >= 30) {
+        showReward("Incredible! You've earned a 30-point reward!", "https://example.com/30-point-reward.png");
+      }
+    }
+
+    // Display reward message and image
+    function showReward(message, imageUrl) {
+      const rewardMessage = document.getElementById("rewardMessage");
+      const rewardImage = document.getElementById("rewardImage");
+      rewardMessage.style.display = "block";
+      rewardMessage.textContent = message;
+      rewardImage.src = imageUrl; // Set the reward image URL
+    }
+
+    // Logout function
+    function logout() {
+      localStorage.removeItem("username"); // Clear username from localStorage
+      localStorage.removeItem("loginPoints"); // Clear login points
+      localStorage.removeItem("lastLogin"); // Clear last login time
+      window.location.href = "index.html"; // Redirect to login page
+    }
+
+    // Redirect to the Withdraw Points page
+    function redirectToWithdrawPage() {
+      const points = parseInt(localStorage.getItem("loginPoints")) || 0;
+      if (points >= 80) {
+        window.location.href = "withdrawal.html"; // Replace with the actual Withdraw Points page
+      } else {
+        alert("You need at least 80 points to withdraw.");
+      }
+    }
+
+    // Redirect to the Publish Story page
+    function redirectToPublishStoryPage() {
+      window.location.href = "publish-story.html"; // Replace with the actual Publish Story page
+    }
+// Automatically increment points when the page loads
+    incrementLoginPoints();
+    
+  </script>
+</body>
+</html>

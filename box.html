@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="grid">
+     
+      <a href="page2.html" class="circle" style="background-image: url('logo.png');"></a>
+    
+      <a href="page4.html" class="circle" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvBdmiPEaocZ971YoAQk1eR4DEIiEuyhYshsTWO6hOxELwyR6R1tQ5vs8P&s=10');"></a>
+      <a href="page5.html" class="circle" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj8EFQa4dPydn8QekExK1VDT6UGqskpB0Eag&usqp=CAU');"></a>
+     
+     
+    </div>
+    <h1>Welcome to ReadOn!</h1>
+    <button class="btn" id="moreButton">
+      <span>Check Plans</span>
+    </button>
+  </div>
+<!-- Modal -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <h2>Plans and Subscription</h2>
+      <p>
+        To have full and enjoyable moment with ReadOn, you are to activate any plans & subscription of their choice among our available plan structures. Thanks
+      </p>
+      <button id="agreeButton" class="btn">Proceed</button>
+    </div>
+  </div>
+
+  <script>
+// Get references to the modal and buttons
+const moreButton = document.getElementById('moreButton');
+const termsModal = document.getElementById('termsModal');
+const agreeButton = document.getElementById('agreeButton');
+
+// Show the modal when "More" button is clicked
+moreButton.addEventListener('click', () => {
+  termsModal.style.display = 'flex';
+});
+
+// Redirect to another page when "Agree" button is clicked
+agreeButton.addEventListener('click', () => {
+  window.location.href = 'plans.html'; // Replace with your actual URL
+});
+
+
+
+</script>
+</body>
+</html>

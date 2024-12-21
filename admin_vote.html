@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Voting Records</title>
+    <style>
+        body {
+            font-family: optima, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('film.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Dark overlay for readability */
+            z-index: -1;
+        }
+
+        header {
+            background-color: rgba(52, 73, 94, 0.9);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            border-left: 4px solid #34495e;
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        .votes {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            background-color: rgba(52, 73, 94, 0.9);
+            color: #ecf0f1;
+            padding: 15px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Voting Records</h1>
+        <p>Track the votes cast by users</p>
+    </header>
+    <main>
+        <h2>Voting Results</h2>
+        <div class="votes">
+            <p id="fictionVotes"><strong>Best Fiction Story:</strong> </p>
+            <p id="nonFictionVotes"><strong>Best Non-Fiction Story:</strong> </p>
+            <p id="africanVotes"><strong>Best African Story:</strong> </p>
+
+
+        </div>
+    </main>
+    <footer>
+        © 2024 ReadOn. All rights reserved.
+    </footer>
+
+    <script>
+        // Load votes from localStorage
+        const votes = JSON.parse(localStorage.getItem('votes')) || {};
+
+        // Display votes
+        document.getElementById('fictionVotes').innerText += votes.fiction || "No votes yet";
+        document.getElementById('nonFictionVotes').innerText += votes.nonfiction || "No votes yet";
+        document.getElementById('africanVotes').innerText += votes.african || "No votes yet";
+
+
+    </script>
+</body>
+</html>

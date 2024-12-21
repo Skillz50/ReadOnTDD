@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Secret of Your Happiness</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'optima', sans-serif;
+    }
+
+    /* Body Styling */
+    body {
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Container */
+    .container {
+      position: relative;
+      max-width: 400px;
+      text-align: center;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    /* Background Image */
+    .container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: brightness(70%);
+    }
+
+    /* Overlay Content */
+    .content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+      color: white;
+    }
+
+    /* Logo Styling */
+    .logo {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px; /* Adjust size */
+      height: 20px; /* Adjust size */
+    }
+
+    .content h1 {
+      font-size: 24px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .content p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    /* Button Styling */
+    .content a {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #000;
+      background: linear-gradient(135deg, #6a11cb, #FFA500);
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .content a:hover {
+      background-color: #ddd;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Replace with your image -->
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEChVzZpp8r6dZHkfGZ16bgOXaO__XfbkyEQ&usqp=CAU" alt="Happiness Background">
+    <!-- Logo Section -->
+    <img class="logo" src="logo1.png" alt="Logo">
+    <!-- Content Section -->
+    <div class="content">
+      <h1>THE SECRET OF YOUR HAPPINESS</h1>
+      <p>derive your joy and hapinness in reading stories </p>
+      <!-- Button linking to another page -->
+      <a href="nextpage.html">GET STARTED</a>
+    </div>
+  </div>
+</body>
+</html>

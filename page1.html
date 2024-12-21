@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReadOn Friction Story</title>
+  <link rel="stylesheet" href="movies.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<style>
+
+/* Modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Allow scrolling if content exceeds the modal */
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+}
+
+/* Modal content styling */
+.modal-content {
+  position: relative;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-height: 90%; /* Limit height to allow for scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+  h1 {
+      text-align: left;
+      font-size: 15px;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      gap: 15px;
+      padding: 10px 0;
+      margin: 0 0;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .movie {
+      flex: 0 0 150px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .movie:hover {
+      transform: scale(1.05);
+    }
+
+    .movie img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    #hidden-section {
+      margin-top: 10px;
+      display: none; /* Hidden by default */
+    }
+
+    .hidden-carousel {
+      display: flex;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      gap: 15px;
+      padding: 10px 0;
+      margin: 0 0;
+    }
+
+    .hidden-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hidden-movie {
+      flex: 0 0 150px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .hidden-movie img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      position: relative;
+      background: transparent;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 640px;
+height:480px;
+      max-width: 800px;
+    }
+
+    .modal-content iframe {
+      width: 100%;
+      height: 600px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background:limegreen;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .modal-close:hover {
+      background: limegreen;
+    }
+    
+  body {
+  margin: 0;
+  font-family: optima, sans-serif;
+}
+
+.footer-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background:linear-gradient(135deg, #6a11cb, #FFA500);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  color: #fff;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); 
+  
+}
+
+.footer-navbar .search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.footer-navbar .search-bar input {
+  flex: 1;
+  padding:3px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+.footer-navbar .search-bar button {
+  background: linear-gradient(135deg, #6a11cb, #FFA500);
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  padding: 3px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.footer-navbar .search-bar button:hover {
+  background-color: #555;
+}
+
+.footer-navbar nav {
+  display: flex;
+  gap: 80px;
+  margin-top: 15px;
+}
+
+.footer-navbar nav a {
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-navbar nav a i {
+  display: block;
+  font-size: 18px;
+}
+
+.footer-navbar nav a span {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.footer-navbar nav a:hover {
+  color: limegreen;
+}
+
+
+/* Avatar Styles */
+.footer-navbar .avatar {
+  margin-left: 15px;
+}
+
+.footer-navbar .avatar img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+
+</style>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>Friction</h1>
+      <div class="icons">
+
+<i onclick="location.href='page4.html'" class="material-icons" style="font-size:25px;color:white">mail</i>
+<i onclick="location.href='index.html'" class="material-icons" style="font-size:25px;color:white">exit_to_app</i>
+
+      </div>
+      
+      
+    </header>
+    
+
+<section id="love">
+
+<div class="card">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyJbZfzRLyqKXmVwxJFap7uGDw-To7t7YKLQ&usqp=CAU" alt="Alakada" class="card-img">
+  <div class="card-content">
+    <div class="title">
+      <span class="netflix-logo">R</span>
+      <span>Series</span>
+    </div>
+    <h2> Harry Potter</h2>
+    <p class="description">Love • War • Rumour • Emotions</p>
+    <div class="actions">
+      <button onclick="location.href='Read1.html'" class="play-btn">▶️ Play</button>
+      <button class="list-btn">Just Added</button>
+    </div>
+  </div>
+</div>
+
+</section>
+
+
+<h1 class="love">Narrated Friction</h1>
+<div class="carousel">
+  <div class="document" onclick="openDocument('aye', 'aye.docx')">
+    <img src="https://via.placeholder.com/150x220" alt="Document 1">
+    <p>aye</p>
+  </div>
+  <div class="document" onclick="openDocument('Document 2', 'path/to/document2.pdf')">
+    <img src="https://via.placeholder.com/150x220" alt="Document 2">
+    <p>Document 2</p>
+  </div>
+  <div class="document" onclick="openDocument('Document 3', 'path/to/document3.docx')">
+    <img src="https://via.placeholder.com/150x220" alt="Document 3">
+    <p>Document 3</p>
+  </div>
+  <div class="document" onclick="openDocument('Document 4', 'path/to/document4.pdf')">
+    <img src="https://via.placeholder.com/150x220" alt="Document 4">
+    <p>Document 4</p>
+  </div>
+</div>
+
+<script>
+  function openDocument(title, path) {
+    // Logic to handle opening the document
+    alert(`Opening ${title}`);
+    window.location.href = path; // Redirects to the document URL
+  }
+</script>
+  <section id="hidden-section">
+    <h1 id="section-title">Recommended Movies</h1>
+    <div class="hidden-carousel">
+      <div class="hidden-movie" onclick="openModal('https://www.youtube.com/embed/tgbNymZ7vqY')">
+        <img src="https://via.placeholder.com/150x220" alt="Hidden Movie 1">
+        <p>Alley</p>
+      </div>
+      <div class="hidden-movie" onclick="openModal('https://www.youtube.com/embed/ScMzIvxBSi4')">
+        <img src="https://via.placeholder.com/150x220" alt="Hidden Movie 2">
+        <p>Hidden Movie 2</p>
+      </div>
+      <div class="hidden-movie" onclick="openModal('https://www.youtube.com/embed/eVTXPUF4Oz4')">
+        <img src="https://via.placeholder.com/150x220" alt="Hidden Movie 3">
+        <p>Hidden Movie 3</p>
+      </div>
+            <div class="hidden-movie" onclick="openModal('https://www.youtube.com/embed/tgbNymZ7vqY')">
+        <img src="https://via.placeholder.com/150x220" alt="Hidden Movie 1">
+        <p>Alley</p>
+      </div>
+      <div class="hidden-movie" onclick="openModal('https://www.youtube.com/embed/ScMzIvxBSi4')">
+        <img src="https://via.placeholder.com/150x220" alt="Hidden Movie 2">
+        <p>Hidden Movie 2</p>
+      </div>
+      <div class="hidden-movie" onclick="openModal('https://www.youtube.com/embed/eVTXPUF4Oz4')">
+        <img src="https://via.placeholder.com/150x220" alt="Hidden Movie 3">
+        <p>Hidden Movie 3</p>
+      </div>
+  
+      
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="video-modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+  
+  
+<h1 class="love">For Ages</h1>
+<div class="carousel">
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+    <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+    <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+    <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+  
+  
+  
+</div>
+
+
+<h1 class="love">Families</h1>
+<div class="carousel">
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+</div>
+  
+  
+  
+<h1 class="love">Feel Good on Sundays</h1>
+<div class="carousel">
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+    <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+  
+  
+</div>
+    
+    
+    
+    <h1 class="love">The Exciting Moment</h1>
+<div class="carousel">
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+    <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+  
+  
+  
+</div>
+  
+  
+  
+  <h1 class="love">Only on ReadOn</h1>
+<div class="carousel">
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+    <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+  
+  
+  
+  
+</div>
+  
+    <h1 class="love">Your Next Read</h1>
+  <div class="carousel">
+    <div class="movie" onclick="handleMovieClick('Movie 4', 'https://www.youtube.com/embed/tgbNymZ7vqY')">
+      <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+      <p>Movie 4</p>
+    </div>
+    <div class="movie" onclick="handleMovieClick('Movie 5', 'https://www.youtube.com/embed/ScMzIvxBSi4')">
+      <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+      <p>Movie 5</p>
+    </div>
+    <div class="movie" onclick="handleMovieClick('Movie 6', 'https://www.youtube.com/embed/eVTXPUF4Oz4')">
+      <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+      <p>Movie 6</p>
+    </div>
+    
+        <div class="movie" onclick="handleMovieClick('Movie 4', 'https://www.youtube.com/embed/tgbNymZ7vqY')">
+      <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+      <p>Movie 4</p>
+    </div>
+    <div class="movie" onclick="handleMovieClick('Movie 5', 'https://www.youtube.com/embed/ScMzIvxBSi4')">
+      <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+      <p>Movie 5</p>
+    </div>
+    <div class="movie" onclick="handleMovieClick('Movie 6', 'https://www.youtube.com/embed/eVTXPUF4Oz4')">
+      <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+      <p>Movie 6</p>
+    </div>    <div class="movie" onclick="handleMovieClick('Movie 4', 'https://www.youtube.com/embed/tgbNymZ7vqY')">
+      <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+      <p>Movie 4</p>
+    </div>
+    <div class="movie" onclick="handleMovieClick('Movie 5', 'https://www.youtube.com/embed/ScMzIvxBSi4')">
+      <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+      <p>Movie 5</p>
+    </div>
+    <div class="movie" onclick="handleMovieClick('Movie 6', 'https://www.youtube.com/embed/eVTXPUF4Oz4')">
+      <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+      <p>Movie 6</p>
+    </div>
+    
+    
+    
+    
+    
+  </div>
+
+  <section id="hidden-section">
+    <h1 id="section-title">Recommended Movies</h1>
+    <div class="hidden-carousel">
+      <div class="hidden-movie" onclick="openModal('https://www.youtube.com/embed/tgbNymZ7vqY')">
+        <img src="https://via.placeholder.com/150x220" alt="Hidden Movie 1">
+        <p>Hidden Movie 1</p>
+      </div>
+      <div class="hidden-movie" onclick="openModal('https://www.youtube.com/embed/ScMzIvxBSi4')">
+        <img src="https://via.placeholder.com/150x220" alt="Hidden Movie 2">
+        <p>Hidden Movie 2</p>
+      </div>
+      <div class="hidden-movie" onclick="openModal('https://www.youtube.com/embed/eVTXPUF4Oz4')">
+        <img src="https://via.placeholder.com/150x220" alt="Hidden Movie 3">
+        <p>Hidden Movie 3</p>
+      </div>
+    </div>
+  </section>
+
+  
+    
+  <h1 class="love">ReadOn Award Winning</h1>
+<div class="carousel">
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+    <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>  <div class="movie" onclick="openModal('https://www.youtube.com/embed/54kbWuK6-s4')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 1">
+    <p>Movie 1</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/dO_lSXWUc4o')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 2">
+    <p>Movie 2</p>
+  </div>
+  <div class="movie" onclick="openModal('https://www.youtube.com/embed/4Ckg0SfazdQ')">
+    <img src="https://via.placeholder.com/150x220" alt="Movie 3">
+    <p>Movie 3</p>
+  </div>
+  
+  
+  
+</div>
+
+<br><br><br><br>
+<br><br>
+
+
+<!-- Footer Navbar -->
+  <footer class="footer-navbar">
+ 
+    <nav>
+      <a href="./page1.html"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="./Bts.html"><i class="fas fa-theater-masks"></i><span>BTS</span></a>
+      <a href="./page5.html"><i class="fas fa-fire-alt"></i><span>Hot</span></a>
+      <div class="avatar">
+<a href="./dashboard.html"><img src="logo.png" alt="User Avatar" /></a>
+    </nav>
+  </footer>
+
+  <script>
+    // JavaScript Functionality
+    function performSearch() {
+      const query = document.getElementById('search-input').value.trim();
+      const resultsDiv = document.getElementById('search-results');
+
+      if (query) {
+        // Example functionality: display the query on the page
+        resultsDiv.innerHTML = `<p>You searched for: <strong>${query}</strong></p>`;
+
+        // If you want to navigate to a new page with the query:
+        // window.location.href = `/search?query=${encodeURIComponent(query)}`;
+      } else {
+        resultsDiv.innerHTML = `<p style="color: red;">Please enter a search term.</p>`;
+      }
+    }
+  </script>
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div id="video-modal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <!-- Scrollable iframe -->
+    <iframe
+      id="video-frame"
+      src=""
+      frameborder="0"
+      width="100%"
+      height="100%"
+      style="overflow: auto;"
+    ></iframe>
+  </div>
+</div>
+
+
+  <script>
+
+
+
+    
+  
+function openModal(docUrl) {
+  const modal = document.getElementById("video-modal");
+  const iframe = document.getElementById("video-frame");
+  iframe.src = docUrl; // Load the document
+  modal.style.display = "block"; // Show the modal
+}
+
+function closeModal() {
+  const modal = document.getElementById("video-modal");
+  const iframe = document.getElementById("video-frame");
+  iframe.src = ""; // Clear the iframe source
+  modal.style.display = "none"; // Hide the modal
+}
+
+
+</script>
+</body>
+</html>
+
+
+
+

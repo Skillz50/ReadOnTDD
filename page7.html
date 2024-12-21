@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon Stories</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: optima, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('film.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Dark overlay for readability */
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(135deg, #6a11cb, #FFA500);
+            color: #ecf0f1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        header .back-button {
+            text-decoration: none;
+            color: #ecf0f1;
+            background: linear-gradient(135deg, #6a11cb, #FFA500);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: 0.3s;
+        }
+
+        header .back-button:hover {
+            background: linear-gradient(135deg, #6a11cb, #FFA500);
+        }
+
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        header .logo-container img {
+            height: 60px;
+        }
+
+        header .title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+
+        /* Main Content */
+        main {
+            padding: 100px 20px 20px; /* Spacing below the fixed header */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .story {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .story:hover {
+            transform: scale(1.05);
+        }
+
+        .story img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .story-details {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .story-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        .story-author {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .story-genre {
+            font-size: 1em;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            max-width: 300px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ffa550;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #6a11cb, #FFA500);
+            color: #ecf0f1;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header>
+        <a href="dashboard.html" class="back-button">Back</a>
+        <div class="logo-container">
+            <img src="logo.png" alt="Site Logo">
+            <div class="title">Hot & Coming Soon</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+
+<main>
+    <div class="grid">
+        <!-- Story 1 -->
+        <div class="story" onclick="openModal(1)">
+            <img src="aluta.jpeg" alt="Story 1 Poster">
+            <div class="story-details">
+                <div class="story-title">Aluta Dey Aloot</div>
+                <div class="story-author">By Kycee</div>
+                <div class="story-genre">Genre: Fiction</div>
+            </div>
+        </div>
+        <div id="modal-1" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal(1)">×</button>
+                <h2>Aluta Dey Aloot</h2>
+                <p>A gripping tale about the resilience of the human spirit in the face of adversity.</p>
+            </div>
+        </div>
+
+        <!-- Story 2 -->
+        <div class="story" onclick="openModal(2)">
+            <img src="marry.jpeg" alt="Story 2 Poster">
+            <div class="story-details">
+                <div class="story-title">Engaged but Available</div>
+                <div class="story-author">By Chetachi</div>
+                <div class="story-genre">Genre: Fiction</div>
+            </div>
+        </div>
+        <div id="modal-2" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal(2)">×</button>
+                <h2>Engaged but Available</h2>
+                <p>A humorous yet profound exploration of relationships and choices.</p>
+            </div>
+        </div>
+
+        <!-- Story 3 -->
+        <div class="story" onclick="openModal(3)">
+            <img src="nat.jpeg" alt="Story 3 Poster">
+            <div class="story-details">
+                <div class="story-title">Nature's Little Mistake</div>
+                <div class="story-author">By Tade</div>
+                <div class="story-genre">Genre: Slice of Life</div>
+            </div>
+        </div>
+        <div id="modal-3" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal(3)">×</button>
+                <h2>Nature's Little Mistake</h2>
+                <p>A touching story that celebrates imperfections and finding beauty in them.</p>
+            </div>
+        </div>
+
+        <!-- Story 4 -->
+        <div class="story" onclick="openModal(4)">
+            <img src="https://www.fablingverse.com/wp-content/uploads/The-Hot-Water-Challenge-Why-the-Lizard-Nods-Its-Head.jpeg" alt="Story 4 Poster">
+            <div class="story-details">
+                <div class="story-title">Hot Water Challenge</div>
+                <div class="story-author">By Shindara Joel</div>
+                <div class="story-genre">Genre: War • Loyalty • Betrayal</div>
+            </div>
+        </div>
+        <div id="modal-4" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal(4)">×</button>
+                <h2>Hot Water Challenge</h2>
+                <p>An intense narrative of courage, loyalty, and unexpected betrayals in wartime.</p>
+            </div>
+        </div>
+
+        <!-- Story 5 -->
+        <div class="story" onclick="openModal(5)">
+            <img src="https://www.fablingverse.com/wp-content/uploads/Monochrome-Thriller-Forest-Photo-Book-Cover-1-833x1329.jpg" alt="Story 5 Poster">
+            <div class="story-details">
+                <div class="story-title">Agadi Nwanyi Na</div>
+                <div class="story-author">By Wankili Jericho</div>
+                <div class="story-genre">Genre: Myth • African • Affection</div>
+            </div>
+        </div>
+        <div id="modal-5" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal(5)">×</button>
+                <h2>Agadi Nwanyi Na</h2>
+                <p>A heartwarming African myth about love, loss, and eternal affection.</p>
+            </div>
+        </div>
+
+        <!-- Story 6 -->
+        <div class="story" onclick="openModal(6)">
+            <img src="https://www.fablingverse.com/wp-content/uploads/A-Dragon-in-the-Sky.jpg" alt="Story 6 Poster">
+            <div class="story-details">
+                <div class="story-title">A Dragon in the Sky</div>
+                <div class="story-author">By Damola Gray</div>
+                <div class="story-genre">Genre: Fantasy</div>
+            </div>
+        </div>
+        <div id="modal-6" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal(6)">×</button>
+                <h2>A Dragon in the Sky</h2>
+                <p>An exhilarating adventure that blends mythology and fantasy with breathtaking visuals.</p>
+            </div>
+        </div>
+
+        <!-- Story 7 -->
+        <div class="story" onclick="openModal(7)">
+            <img src="https://www.fablingverse.com/wp-content/uploads/The-Silent-Cry-Book.jpg" alt="Story 7 Poster">
+            <div class="story-details">
+                <div class="story-title">The Silent Cry</div>
+                <div class="story-author">By Aisha Sule</div>
+                <div class="story-genre">Genre: Drama</div>
+            </div>
+        </div>
+        <div id="modal-7" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal(7)">×</button>
+                <h2>The Silent Cry</h2>
+                <p>A powerful drama about the struggle for justice and human dignity in a cold world.</p>
+            </div>
+        </div>
+
+        <!-- Story 8 -->
+        <div class="story" onclick="openModal(8)">
+            <img src="https://www.fablingverse.com/wp-content/uploads/Colors-of-Dawn-Book-Cover.jpg" alt="Story 8 Poster">
+            <div class="story-details">
+                <div class="story-title">Colors of Dawn</div>
+                <div class="story-author">By Ada Eze</div>
+                <div class="story-genre">Genre: Poetry</div>
+            </div>
+        </div>
+        <div id="modal-8" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal(8)">×</button>
+                <h2>Colors of Dawn</h2>
+                <p>A mesmerizing collection of poems that explore the beauty of beginnings and hope.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+            <!-- Add other stories similarly -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 ReadOn. All rights reserved.
+    </footer>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(`modal-${id}`).style.display = "flex";
+        }
+
+        function closeModal(id) {
+            document.getElementById(`modal-${id}`).style.display = "none";
+        }
+    </script>
+</body>
+</html>
